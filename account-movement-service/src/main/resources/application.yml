@@ -1,0 +1,32 @@
+server:
+  port: 3002
+spring:
+  application:
+    name: account-movement-service
+  webflux:
+    base-path: /api/v1
+  kafka:
+    consumer:
+      properties:
+        client-topic: client-ext-inf
+    bootstrap-servers: kafka:29092
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      port: 5436
+      hostname: localhost
+  datasource:
+    url: jdbc:postgresql://localhost:5436/account-movement
+    username: postgres
+    password: postgres
+    name: account-movement
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: redis

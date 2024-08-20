@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    container_name: client-person-service_postgres_16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: client-person
+      PGDATA: /data/postgres

@@ -1,0 +1,24 @@
+server:
+  port: 3001
+spring:
+  application:
+    name: client-person-service
+  webflux:
+    base-path: /api/v1
+  kafka:
+    producer:
+      properties:
+        client-external-information-topic: client-ext-inf
+        client-external-information-key: cli-per
+    bootstrap-servers: kafka:29092
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/client-person
+    username: postgres
+    password: postgres
