@@ -13,8 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -46,6 +45,7 @@ class PersonReactiveRouterTest {
                 .consumeWith(result-> {
                     PersonDTO responsePersonDTO = result.getResponseBody();
                     assertNotNull(responsePersonDTO);
+                    assertNull(requestPersonDTO.id());
                     assertNotNull(responsePersonDTO.id());
                     assertEquals(requestPersonDTO.identification(), responsePersonDTO.identification());
                 });
