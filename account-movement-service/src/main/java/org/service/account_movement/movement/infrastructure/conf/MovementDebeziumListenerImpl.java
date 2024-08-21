@@ -8,16 +8,20 @@ import io.debezium.engine.format.ChangeEventFormat;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.service.account_movement.account.infrastructure.shared.DebeziumEventUtil;
 import org.service.account_movement.movement.application.usescases.command.contract.IReplicateMovementUseCase;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+@Log4j2
 @Component
 public class MovementDebeziumListenerImpl {
     private final Executor executor = Executors.newSingleThreadExecutor();
@@ -38,12 +42,16 @@ public class MovementDebeziumListenerImpl {
                 .notifying(this::handleChangeEvent)
                 .build();
         this.replicateMovementUseCase = replicateMovementUseCase;
-
     }
 
     private void handleChangeEvent(RecordChangeEvent<SourceRecord> sourceRecordRecordChangeEvent) {
-        DebeziumEventUtil util = new DebeziumEventUtil(sourceRecordRecordChangeEvent);
-        replicateMovementUseCase.replicateData(util.payload(), util.operation().name());
+        Mono.fromRunnable(() -> {
+            DebeziumEventUtil util = new DebeziumEventUtil(sourceRecordRecordChangeEvent);
+            replicateMovementUseCase.replicateData(util.payload(), util.operation().name());
+        })
+        .subscribeOn(Schedulers.boundedElastic())
+        .doOnError(e -> log.error(e.getMessage(), e))
+        .subscribe();
     }
 
     @PostConstruct

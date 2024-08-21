@@ -9,16 +9,14 @@ import org.service.account_movement.account.application.usecases.query.implement
 import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
 import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
 import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
-import org.service.account_movement.movement.domain.out.IMovementCommandRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanAccountConfiguration {
     @Bean
-    ICreateAccountUseCase createAccountUseCase (final IAccountCommandRepository accountCommandRepository,
-                                                final IMovementCommandRepository movementCommandRepository) {
-        return new CreateAccountUseCaseImpl(accountCommandRepository, movementCommandRepository);
+    ICreateAccountUseCase createAccountUseCase (final IAccountCommandRepository accountCommandRepository) {
+        return new CreateAccountUseCaseImpl(accountCommandRepository);
     }
 
     @Bean

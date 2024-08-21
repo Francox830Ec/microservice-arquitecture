@@ -33,7 +33,7 @@ public class ReplicateAccountUseCaseImpl implements IReplicateAccountUseCase {
             case "DELETE":
                 commandReadingDBRepository.deleteById(UUID.fromString(payload.get("accId").toString()));
                 break;
-            default: throw new OperationNotFounfException("Operation " + operation +" not supported");
+            default: throw new OperationNotFounfException("Operation " + operation +" not supported for replicate");
         }
     }
 }

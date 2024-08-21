@@ -22,21 +22,24 @@ public class CreateMovementUseCaseImpl implements ICreateMovementUseCase {
 
     @Override
     public MovementDTO create(MovementDTO dto) {
-        validate(dto);
+        validateDTO(dto);
+        validateAccountBalance(dto);
         return repository.create(dto);
     }
 
-    private void validate(MovementDTO dto){
+    private void validateDTO(MovementDTO dto){
         if (dto.value() == null || dto.value().compareTo(BigDecimal.ZERO) == 0) {
             throw new InvalidValueException("Movement value cannot be zero or null");
         }
+    }
 
-        MovementDTO lastMovementByAccount = getFinalBalanceByAccount(dto.accountId()).get();
-
-        if((dto.value().compareTo(BigDecimal.ZERO) < 0) && ( (lastMovementByAccount.finalBalance().compareTo(BigDecimal.ZERO) == 0)  || (
-                dto.value().abs().compareTo(lastMovementByAccount.finalBalance()) > 0 ) ) ){
-                throw new InvalidValueException("Valor solicitado es mayor que el saldo disponible :/");
-        }
+    private void validateAccountBalance(MovementDTO dto) {
+        getFinalBalanceByAccount(dto.accountId()).ifPresent(lastMovementDTO -> {
+            if((dto.value().compareTo(BigDecimal.ZERO) < 0) && ((lastMovementDTO.finalBalance().compareTo(BigDecimal.ZERO) == 0)
+                    || (dto.value().abs().compareTo(lastMovementDTO.finalBalance()) > 0 ))){
+                throw new InvalidValueException("Requested amount is greater than the available balance :/");
+            }
+        });
     }
 
     private Optional<MovementDTO> getFinalBalanceByAccount(UUID accountID){

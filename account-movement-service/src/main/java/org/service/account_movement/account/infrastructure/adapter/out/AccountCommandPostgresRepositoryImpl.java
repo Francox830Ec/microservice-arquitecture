@@ -21,9 +21,7 @@ public class AccountCommandPostgresRepositoryImpl implements IAccountCommandRepo
 
     @Override
     public AccountDTO create(AccountDTO accountDTO) {
-        AccountEntity accountEntity = mapper.dtoToEntity(accountDTO);
-        AccountEntity save = repository.save(accountEntity);
-        return mapper.entityToDTO(save);
+        return mapper.entityToDTO(repository.save(mapper.dtoToEntity(accountDTO)));
     }
 
     @Override
