@@ -1,7 +1,6 @@
 package org.service.account_movement.movement.domain.out;
 
 import org.service.account_movement.movement.domain.MovementDTO;
-import org.service.account_movement.movement.infrastructure.hash.MovementHash;
 
 import java.time.LocalDateTime;
 import java.util.List;
