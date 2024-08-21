@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import java.util.UUID;
-
 @Log4j2
 @Service
 public class MovementCommandReactiveServiceImpl implements IMovementCommandReactiveService {
