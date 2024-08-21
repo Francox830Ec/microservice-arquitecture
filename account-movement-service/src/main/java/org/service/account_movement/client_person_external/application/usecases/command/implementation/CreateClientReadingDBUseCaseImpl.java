@@ -7,6 +7,8 @@ import org.service.account_movement.client_person_external.domain.model.ClientPe
 import org.service.account_movement.client_person_external.domain.model.CustomEvent;
 import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
 
+import java.util.Optional;
+
 public class CreateClientReadingDBUseCaseImpl implements ICreateClientReadingDBUseCase {
     private final IClientReadingDBRepository repository;
     private final ObjectMapper objectMapper;
@@ -20,9 +22,9 @@ public class CreateClientReadingDBUseCaseImpl implements ICreateClientReadingDBU
 
     @Override
     public void create(CustomEvent<?> event) {
-        ClientPersonReceiverMQDTO clientPerson = objectMapper.convertValue(event.data(), ClientPersonReceiverMQDTO.class);
-
-        repository.save(new ClientDTO(clientPerson.clientID(), clientPerson.clientState(), clientPerson.person().personName(),
-                clientPerson.person().personIdentification(), null));
+        Optional.of(objectMapper.convertValue(event.data(), ClientPersonReceiverMQDTO.class))
+                .ifPresent(clientPerson ->
+                    repository.save(new ClientDTO(clientPerson.clientID(), clientPerson.clientState(),
+                            clientPerson.person().personName(), clientPerson.person().personIdentification(), null)));
     }
 }
