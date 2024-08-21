@@ -11,7 +11,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Optional;
 
 public class FindClientByPersonIdentificationUseCaseImpl implements IFindClientByPersonIdentificationUseCase {
     private final IClientReadingDBRepository repository;
@@ -22,41 +24,41 @@ public class FindClientByPersonIdentificationUseCaseImpl implements IFindClientB
 
     @Override
     public ClientDTO findByPersonIdentificationAndDatesRange(String personIdentification, Map<String, String> datesRange) {
-        ClientDTO clientDTO = validateClient(personIdentification);
-        Map<String, LocalDateTime> datesRangeMap = validateDatesRange(datesRange);
-
-        List<AccountDTO> accountsSortedlist = clientDTO.accounts()
-                .stream().map(accountDTO -> new AccountDTO(accountDTO.id(), accountDTO.clientID(), accountDTO.number(),
-                        accountDTO.type(), accountDTO.initialBalance(), accountDTO.state(),
-                        accountDTO.movements().stream().filter(dto ->
-                                        (datesRangeMap.get("initialDate").isBefore(dto.date())
-                                                || datesRangeMap.get("initialDate").equals(dto.date()))
-                                    && (datesRangeMap.get("finalDate").isAfter(dto.date())
-                                                || datesRangeMap.get("finalDate").equals(dto.date()))
-                        ).sorted((o1, o2) -> o2.date().compareTo(o1.date())).toList()
-                )).sorted(Comparator.comparing(AccountDTO::number)).toList();
-
-        return new ClientDTO(clientDTO.clientID(), clientDTO.clientState(), clientDTO.personName(),
-                clientDTO.personIdentification(), accountsSortedlist);
+        return getClientDTO(personIdentification)
+                .map(clientDTO -> {
+                    Map<String, LocalDateTime> datesRangeMap = validateDatesRange(datesRange);
+                    return new ClientDTO(clientDTO.clientID(), clientDTO.clientState(), clientDTO.personName(),
+                            clientDTO.personIdentification(),
+                            clientDTO.accounts()
+                                    .stream().map(accountDTO -> new AccountDTO(accountDTO.id(), accountDTO.clientID(), accountDTO.number(),
+                                            accountDTO.type(), accountDTO.initialBalance(), accountDTO.state(),
+                                            accountDTO.movements().stream().filter(dto ->
+                                                    (datesRangeMap.get("initialDate").isBefore(dto.date())
+                                                            || datesRangeMap.get("initialDate").equals(dto.date()))
+                                                            && (datesRangeMap.get("finalDate").isAfter(dto.date())
+                                                            || datesRangeMap.get("finalDate").equals(dto.date()))
+                                            ).sorted((o1, o2) -> o2.date().compareTo(o1.date())).toList()
+                                    )).sorted(Comparator.comparing(AccountDTO::number)).toList());
+                }).orElseThrow(() -> new EntityNotFoundException("Client with identification " + personIdentification + " not found"));
     }
 
-    private ClientDTO validateClient(String personIdentification) {
-        Optional<ClientDTO> optionalClientDTO = Optional.ofNullable(repository.findByPersonIdentification(personIdentification)
-                .orElseThrow(() -> new EntityNotFoundException("Client with identification " + personIdentification + " not found")));
-        return optionalClientDTO.get();
+    private Optional<ClientDTO> getClientDTO(String personIdentification) {
+        return repository.findByPersonIdentification(personIdentification);
     }
+
 
     private Map<String, LocalDateTime> validateDatesRange(Map<String, String> datesRange) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         long maxMonthsBetweenDates = 3;
-        Map<String, LocalDateTime> datesRangeMap = new HashMap<String, LocalDateTime>();
+        String exampleDate = "Example: From " + LocalDate.now().minusMonths(maxMonthsBetweenDates) + " to " + LocalDate.now();
+        Map<String, LocalDateTime> datesRangeMap;
 
         try{
             LocalDateTime initialDate = LocalDate.parse(datesRange.get("fechaInicial"), formatter).atStartOfDay();
             LocalDateTime finalDate = LocalDate.parse(datesRange.get("fechaFinal"), formatter).atTime(LocalTime.MAX);
 
             if(initialDate.isAfter(finalDate)){
-                throw new InvalidValueException("Fecha inicial no puede ser mayor que la fecha final..");
+                throw new InvalidValueException("Initial date cannot be greater than finish date..");
             }
 
             int initialRange = initialDate.toLocalDate().compareTo(LocalDate.now().minusMonths(maxMonthsBetweenDates));
@@ -65,12 +67,11 @@ public class FindClientByPersonIdentificationUseCaseImpl implements IFindClientB
             if (initialRange >= 0 && finalRange <= 0){
                 datesRangeMap = Map.of("initialDate", initialDate, "finalDate", finalDate);
             }else {
-                throw new InvalidValueException("Sólo se permite consultar hasta " + maxMonthsBetweenDates +
-                        " meses anteriores a la fecha actual. Ejemplo: De " + LocalDate.now().minusMonths(maxMonthsBetweenDates)
-                        + " a " + LocalDate.now());
+                throw new InvalidValueException("Only the last " + maxMonthsBetweenDates + " months to the current date "
+                        + " are allowed in this report. " + exampleDate);
             }
         }catch (Exception exception){
-            throw new InvalidValueException("Error en el formato de fechas: " + exception.getMessage());
+            throw new InvalidValueException("Error in date format.. " + exampleDate);
         }
 
         return datesRangeMap;
