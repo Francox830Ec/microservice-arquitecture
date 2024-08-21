@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AutoConfigureWebTestClient
@@ -41,7 +42,13 @@ class PersonReactiveRouterTest {
                 .uri("/person")
                 .body(Mono.just(requestPersonDTO), PersonDTO.class)
                 .exchange()
-                .expectBody(PersonDTO.class);
+                .expectBody(PersonDTO.class)
+                .consumeWith(result-> {
+                    PersonDTO responsePersonDTO = result.getResponseBody();
+                    assertNotNull(responsePersonDTO);
+                    assertNotNull(responsePersonDTO.id());
+                    assertEquals(requestPersonDTO.identification(), responsePersonDTO.identification());
+                });
     }
 
     private static PersonDTO buildRequestPersonDTO() {

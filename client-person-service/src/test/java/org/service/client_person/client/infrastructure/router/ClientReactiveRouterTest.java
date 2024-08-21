@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AutoConfigureWebTestClient
@@ -43,7 +44,13 @@ class ClientReactiveRouterTest {
                 .uri("/clientes")
                 .body(Mono.just(requestClientDTO), ClientDTO.class)
                 .exchange()
-                .expectBody(ClientDTO.class);
+                .expectBody(ClientDTO.class)
+                .consumeWith(result-> {
+                    ClientDTO responseClientDTO = result.getResponseBody();
+                    assertNotNull(responseClientDTO);
+                    assertNotNull(responseClientDTO.id());
+                    assertEquals(requestClientDTO.person().identification(), responseClientDTO.person().identification());
+                });
     }
 
     @Test
@@ -56,7 +63,8 @@ class ClientReactiveRouterTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(ClientDTO.class)
-                .isEqualTo(clientListDTO);
+                .isEqualTo(clientListDTO)
+                .hasSize(clientListDTO.size());
     }
 
     private static List<ClientDTO> buildClientDTOList() {
