@@ -41,6 +41,7 @@ class PersonReactiveRouterTest {
                 .uri("/person")
                 .body(Mono.just(requestPersonDTO), PersonDTO.class)
                 .exchange()
+                .expectStatus().isCreated()
                 .expectBody(PersonDTO.class)
                 .consumeWith(result-> {
                     PersonDTO responsePersonDTO = result.getResponseBody();

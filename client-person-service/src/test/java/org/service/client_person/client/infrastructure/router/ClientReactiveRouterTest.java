@@ -43,6 +43,7 @@ class ClientReactiveRouterTest {
                 .uri("/clientes")
                 .body(Mono.just(requestClientDTO), ClientDTO.class)
                 .exchange()
+                .expectStatus().isCreated()
                 .expectBody(ClientDTO.class)
                 .consumeWith(result-> {
                     ClientDTO responseClientDTO = result.getResponseBody();

@@ -23,7 +23,7 @@ public class MovementReactiveHandler {
         return request.bodyToMono(MovementDTO.class)
                 .flatMap(commandReactiveService::create)
                 .flatMap(response -> ServerResponse
-                        .status(HttpStatus.OK)
+                        .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(response)))
                 .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));

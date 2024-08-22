@@ -23,7 +23,7 @@ public class PersonReactiveHandler {
         return request.bodyToMono(PersonDTO.class)
                 .flatMap(personReactiveService::create)
                 .flatMap(response -> ServerResponse
-                        .status(HttpStatus.OK)
+                        .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(response)))
                 .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));

@@ -29,7 +29,7 @@ public class AccountReactiveHandler {
         return request.bodyToMono(AccountDTO.class)
                 .flatMap(commandReactiveService::create)
                 .flatMap(response -> ServerResponse
-                        .status(HttpStatus.OK)
+                        .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(response)))
                 .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
@@ -48,7 +48,7 @@ public class AccountReactiveHandler {
     public Mono<ServerResponse> delete(ServerRequest request){
         return commandReactiveService.delete(UUID.fromString(request.pathVariable("uuid")))
                 .then(ServerResponse
-                        .status(HttpStatus.OK)
+                        .status(HttpStatus.NO_CONTENT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .build())
                 .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
