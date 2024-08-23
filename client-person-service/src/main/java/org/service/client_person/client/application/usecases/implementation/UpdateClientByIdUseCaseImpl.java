@@ -25,7 +25,7 @@ public class UpdateClientByIdUseCaseImpl implements IUpdateClientByIdUseCase {
                                     requestClientDTO.person().name(),
                                     requestClientDTO.person().gender(),
                                     requestClientDTO.person().age(),
-                                    requestClientDTO.person().identification(),
+                                    savedClientDTO.person().identification(),
                                     requestClientDTO.person().address(),
                                     requestClientDTO.person().phone()))))
                 .orElseThrow(() -> new RecursoNotFoundException(new StringBuilder("Client not found with id: ").append(id).toString()));

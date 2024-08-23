@@ -30,7 +30,8 @@ public class FindClientByPersonIdentificationUseCaseImpl implements IFindClientB
                     return new ClientDTO(clientDTO.clientID(), clientDTO.clientState(), clientDTO.personName(),
                             clientDTO.personIdentification(),
                             clientDTO.accounts()
-                                    .stream().map(accountDTO -> new AccountDTO(accountDTO.id(), accountDTO.clientID(), accountDTO.number(),
+                                    .stream().map(accountDTO ->
+                                            new AccountDTO(accountDTO.id(), accountDTO.clientID(), accountDTO.number(),
                                             accountDTO.type(), accountDTO.initialBalance(), accountDTO.state(),
                                             accountDTO.movements().stream().filter(dto ->
                                                     (datesRangeMap.get("initialDate").isBefore(dto.date())

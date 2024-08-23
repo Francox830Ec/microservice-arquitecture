@@ -1,6 +1,7 @@
 package org.service.client_person.client.application.usecases.implementation;
 
 import org.service.client_person.client.application.usecases.contract.IFindByIdClientUseCase;
+import org.service.client_person.client.application.usecases.exception.RecursoNotFoundException;
 import org.service.client_person.client.domain.model.ClientDTO;
 import org.service.client_person.client.domain.port.out.IClientRepository;
 
@@ -16,6 +17,7 @@ public class FindByIdClientUseCaseImpl implements IFindByIdClientUseCase {
 
     @Override
     public Optional<ClientDTO> findById(UUID id) {
-        return repository.findById(id);
+        return Optional.ofNullable(repository.findById(id).
+                orElseThrow(() -> new RecursoNotFoundException("Client with id " + id + " not found")));
     }
 }
