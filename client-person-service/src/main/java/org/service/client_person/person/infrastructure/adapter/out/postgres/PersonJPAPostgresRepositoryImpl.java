@@ -1,7 +1,7 @@
-package org.service.client_person.person.infrastructure.adapter.out;
+package org.service.client_person.person.infrastructure.adapter.out.repository;
 
 import org.service.client_person.person.domain.model.PersonDTO;
-import org.service.client_person.person.domain.port.out.IPersonRepository;
+import org.service.client_person.person.domain.port.out.repository.IPersonRepository;
 import org.service.client_person.person.infrastructure.mapper.IPersonMapper;
 import org.springframework.stereotype.Repository;
 

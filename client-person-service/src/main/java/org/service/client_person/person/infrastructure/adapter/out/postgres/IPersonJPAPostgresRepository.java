@@ -1,4 +1,4 @@
-package org.service.client_person.person.infrastructure.adapter.out;
+package org.service.client_person.person.infrastructure.adapter.out.repository;
 
 import org.service.client_person.person.infrastructure.entity.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

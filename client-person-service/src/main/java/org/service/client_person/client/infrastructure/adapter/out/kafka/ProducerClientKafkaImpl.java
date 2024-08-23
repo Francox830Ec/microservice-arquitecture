@@ -1,8 +1,8 @@
-package org.service.client_person.client.infrastructure.adapter.out;
+package org.service.client_person.client.infrastructure.adapter.out.messages;
 
 import lombok.extern.log4j.Log4j2;
 import org.service.client_person.client.domain.model.CustomEvent;
-import org.service.client_person.client.domain.port.out.IProducerClientMQ;
+import org.service.client_person.client.domain.port.out.messages.IProducerClientMQ;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate;
 import org.springframework.stereotype.Component;

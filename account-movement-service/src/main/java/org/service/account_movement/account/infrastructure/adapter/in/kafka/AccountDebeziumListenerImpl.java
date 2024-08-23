@@ -1,4 +1,4 @@
-package org.service.account_movement.account.infrastructure.adapter.in;
+package org.service.account_movement.account.infrastructure.adapter.in.messages;
 
 import io.debezium.config.Configuration;
 import io.debezium.embedded.Connect;
@@ -10,7 +10,7 @@ import jakarta.annotation.PreDestroy;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.service.account_movement.account.application.usecases.command.contract.IReplicateAccountUseCase;
-import org.service.account_movement.account.domain.port.in.IAccountCDCListener;
+import org.service.account_movement.account.domain.port.in.messages.IAccountCDCListener;
 import org.service.account_movement.account.infrastructure.shared.DebeziumEventUtil;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

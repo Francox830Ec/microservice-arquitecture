@@ -1,7 +1,7 @@
 package org.service.account_movement.account.infrastructure.adapter.out;
 
 import org.service.account_movement.account.domain.model.AccountDTO;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
 import org.service.account_movement.account.infrastructure.mapper.IAccountMapper;
 import org.springframework.stereotype.Repository;
 
