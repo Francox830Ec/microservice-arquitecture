@@ -1,10 +1,13 @@
 package org.service.account_movement.account.application.usecases.command.implementation;
 
+import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.service.account_movement.account.application.usecases.command.contract.IReplicateAccountUseCase;
 import org.service.account_movement.account.application.usecases.exception.OperationNotFounfException;
+import org.service.account_movement.account.domain.model.AccountDTO;
 import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
 import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,8 +24,11 @@ public class ReplicateAccountUseCaseImpl implements IReplicateAccountUseCase {
     @Override
     public void replicateData(Map<String, Object> payload, String operation) {
         switch (operation){
-            case "CREATE", "UPDATE":
+            case "CREATE":
                 commandReadingDBRepository.create(payload);
+                break;
+            case "UPDATE":
+                commandReadingDBRepository.update(buildAccountDTO(payload));
                 break;
             case "READ": {
                 if (!queryRepository.existsById(UUID.fromString(payload.get("accId").toString()))){
@@ -35,5 +41,19 @@ public class ReplicateAccountUseCaseImpl implements IReplicateAccountUseCase {
                 break;
             default: throw new OperationNotFounfException("Operation " + operation +" not supported for replicate");
         }
+    }
+
+    private AccountDTO buildAccountDTO(Map<String, Object> payload) {
+        return queryRepository.findById(UUID.fromString(payload.get("accId").toString())).map(accountDTO ->
+             new AccountDTO(
+                    UUID.fromString(payload.get("accId").toString()),
+                    UUID.fromString(payload.get("cliId").toString()),
+                    payload.get("accNumber").toString(),
+                    payload.get("accType").toString(),
+                    (BigDecimal) payload.get("accInitialBalance"),
+                    (Boolean) payload.get("accState"),
+                    accountDTO.movements()
+            )
+        ).orElseThrow(() -> new ResourceNotFoundException("Account in ReadingDB not found with id " + payload.get("accId").toString()));
     }
 }

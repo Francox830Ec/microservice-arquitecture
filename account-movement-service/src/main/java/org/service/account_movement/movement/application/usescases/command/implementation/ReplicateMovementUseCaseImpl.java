@@ -6,6 +6,7 @@ import org.service.account_movement.account.application.usecases.exception.Opera
 import org.service.account_movement.account.domain.model.AccountDTO;
 import org.service.account_movement.account.domain.model.ClientDTO;
 import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
 import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
 import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
 import org.service.account_movement.movement.application.usescases.command.contract.IReplicateMovementUseCase;
@@ -30,19 +31,22 @@ public class ReplicateMovementUseCaseImpl implements IReplicateMovementUseCase {
     private final IAccountQueryRepository accountQueryRepository;
     private final IAccountCommandReadingDBRepository accountCommandReadingDBRepository;
     private final IClientReadingDBRepository clientReadingDBRepository;
+    private final IAccountCommandRepository accountCommandRepository;
 
     public ReplicateMovementUseCaseImpl(IMovementCommandReadingDBRepository commandReadingDBRepository,
                                         IMovementQueryRepository queryRepository,
                                         IMovementCommandRepository movementCommandRepository,
                                         IAccountQueryRepository accountQueryRepository,
                                         IAccountCommandReadingDBRepository accountCommandReadingDBRepository,
-                                        IClientReadingDBRepository clientReadingDBRepository) {
+                                        IClientReadingDBRepository clientReadingDBRepository,
+                                        IAccountCommandRepository accountCommandRepository) {
         this.commandReadingDBRepository = commandReadingDBRepository;
         this.queryRepository = queryRepository;
         this.movementCommandRepository = movementCommandRepository;
         this.accountQueryRepository = accountQueryRepository;
         this.accountCommandReadingDBRepository = accountCommandReadingDBRepository;
         this.clientReadingDBRepository = clientReadingDBRepository;
+        this.accountCommandRepository = accountCommandRepository;
     }
 
     @Override
@@ -65,9 +69,10 @@ public class ReplicateMovementUseCaseImpl implements IReplicateMovementUseCase {
 
     private void persistData(Map<String, Object> payload){
         MovementDTO movementDTO = createdMovementReadingDB(payload);
-        AccountDTO accountDTO = updateAccountMovementsListReadingDB(movementDTO.accountId());
+        AccountDTO accountDTO = updateAccountMovementsListReadingDB(movementDTO);
         updateClientAccountsListReadingDB(accountDTO.clientID());
         updateMovementWritingDB(movementDTO);
+        updateAccountWritingDB(accountDTO);
     }
 
     private void updateClientAccountsListReadingDB(UUID clientID) {
@@ -81,13 +86,17 @@ public class ReplicateMovementUseCaseImpl implements IReplicateMovementUseCase {
         movementCommandRepository.update(movementDTO);
     }
 
-    private AccountDTO updateAccountMovementsListReadingDB(UUID accountID) {
-        return accountQueryRepository.findById(accountID).map(accountDTO ->
+    private void updateAccountWritingDB(AccountDTO accountDTO){
+        accountCommandRepository.update(accountDTO);
+    }
+
+    private AccountDTO updateAccountMovementsListReadingDB(MovementDTO movementDTO ) {
+        return accountQueryRepository.findById(movementDTO.accountId()).map(dto ->
                 accountCommandReadingDBRepository.update(
-                        new AccountDTO(accountDTO.id(), accountDTO.clientID(), accountDTO.number(),
-                        accountDTO.type(), accountDTO.initialBalance(), accountDTO.state(),
-                        queryRepository.findAllByAccountId(accountID)))
-        ).orElseThrow((() -> new ResourceNotFoundException("Account in ReadingDB not found with id " + accountID)));
+                        new AccountDTO(dto.id(), dto.clientID(), dto.number(),
+                        dto.type(), movementDTO.finalBalance() , dto.state(),
+                        queryRepository.findAllByAccountId(dto.id())))
+        ).orElseThrow((() -> new ResourceNotFoundException("Account in ReadingDB not found with id " + movementDTO.accountId())));
     }
 
     private MovementDTO createdMovementReadingDB(Map<String, Object> payload) {

@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IAccountRedisRepository extends CrudRepository<AccountHash, UUID> {
-    List<AccountHash> findAllByState(String state);
-    Optional<AccountHash> findByIdAndState(UUID uuid, String state);
+    List<AccountHash> findAllByState(Boolean state);
+    Optional<AccountHash> findByIdAndState(UUID uuid, Boolean state);
     List<AccountHash> findAllByClientID(UUID clientID);
 }

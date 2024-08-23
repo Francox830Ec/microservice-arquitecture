@@ -25,8 +25,10 @@ public record AccountHash(
         String number,
         String type,
         BigDecimal initialBalance,
+
         @Indexed
         String state,
+
         @Reference
         Set<MovementHash> movements
         ){

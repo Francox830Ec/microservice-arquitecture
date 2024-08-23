@@ -8,9 +8,10 @@ import java.util.UUID;
 
 public interface IAccountQueryRepository {
     List<AccountDTO> findAll();
-    List<AccountDTO> findAllByState(String state);
+    List<AccountDTO> findAllByState(Boolean state);
     Optional<AccountDTO> findById(UUID uuid);
-    Optional<AccountDTO> findByIdAndState(UUID uuid, String state);
+    Optional<AccountDTO> findByIdAndState(UUID uuid, Boolean state);
     boolean existsById(UUID id);
     List<AccountDTO> findAllByClientID(UUID clientID);
+    long count();
 }

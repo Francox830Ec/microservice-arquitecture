@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IFindByIdAndStateAccountUseCase {
-    Optional<AccountDTO> findByIdAndState(UUID id, String state);
+    Optional<AccountDTO> findByIdAndState(UUID id, Boolean state);
 }

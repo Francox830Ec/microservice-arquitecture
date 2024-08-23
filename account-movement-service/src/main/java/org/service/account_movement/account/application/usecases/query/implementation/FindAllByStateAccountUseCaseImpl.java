@@ -15,7 +15,7 @@ public class FindAllByStateAccountUseCaseImpl implements IFindAllByStateAccountU
 
 
     @Override
-    public List<AccountDTO> findAllByState(String state) {
+    public List<AccountDTO> findAllByState(Boolean state) {
         return repository.findAllByState(state);
     }
 }

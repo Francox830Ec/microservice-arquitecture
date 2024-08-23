@@ -20,12 +20,12 @@ public class DeleteLogicalAccountUseCaseImpl implements IDeleteLogicalAccountUse
 
     @Override
     public void deleteById(UUID id) {
-        if(!queryRepository.existsById(id)) {
-            throw new RecursoNotFoundException("Not found account with id " + id);
-        }
-
-        AccountDTO dto = queryRepository.findByIdAndState(id, "true").get();
-        commandRepository.update(new AccountDTO(dto.id(), dto.clientID(), dto.number(),
-                dto.type(), dto.initialBalance(), "false", dto.movements()));
+        queryRepository.findById(id).ifPresentOrElse(accountDTO ->
+            commandRepository.update(
+                    new AccountDTO(accountDTO.id(), accountDTO.clientID(), accountDTO.number(), accountDTO.type(),
+                    accountDTO.initialBalance(), false, accountDTO.movements()
+            )),() -> {
+            throw new RecursoNotFoundException("Account not found with id " + id);
+        });
     }
 }

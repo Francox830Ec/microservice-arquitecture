@@ -8,4 +8,5 @@ public interface IAccountCommandRepository {
     AccountDTO create(AccountDTO accountDTO);
     AccountDTO update(AccountDTO accountDTO);
     void deleteById(UUID id);
+    long count();
 }

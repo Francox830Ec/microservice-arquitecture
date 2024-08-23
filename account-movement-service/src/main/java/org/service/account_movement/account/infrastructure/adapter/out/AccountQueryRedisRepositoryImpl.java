@@ -25,7 +25,7 @@ public class AccountQueryRedisRepositoryImpl implements IAccountQueryRepository 
     }
 
     @Override
-    public List<AccountDTO> findAllByState(String state) {
+    public List<AccountDTO> findAllByState(Boolean state) {
         return mapper.iterableToList(repository.findAllByState(state));
     }
 
@@ -35,7 +35,7 @@ public class AccountQueryRedisRepositoryImpl implements IAccountQueryRepository 
     }
 
     @Override
-    public Optional<AccountDTO> findByIdAndState(UUID uuid, String state) {
+    public Optional<AccountDTO> findByIdAndState(UUID uuid, Boolean state) {
         return Optional.ofNullable(mapper.hashToDTO(repository.findByIdAndState(uuid, state).orElse(null)));
     }
 
@@ -47,5 +47,10 @@ public class AccountQueryRedisRepositoryImpl implements IAccountQueryRepository 
     @Override
     public List<AccountDTO> findAllByClientID(UUID clientID) {
         return mapper.iterableToList(repository.findAllByClientID(clientID));
+    }
+
+    @Override
+    public long count() {
+        return repository.count();
     }
 }

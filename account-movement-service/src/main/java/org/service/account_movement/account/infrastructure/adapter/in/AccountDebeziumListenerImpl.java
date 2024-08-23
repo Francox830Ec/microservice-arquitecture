@@ -46,12 +46,12 @@ public class AccountDebeziumListenerImpl implements IAccountCDCListener {
 
     private void handleChangeEvent(RecordChangeEvent<SourceRecord> sourceRecordRecordChangeEvent) {
         Mono.fromRunnable(() -> {
-                    DebeziumEventUtil util = new DebeziumEventUtil(sourceRecordRecordChangeEvent);
-                    replicateAccountUseCase.replicateData(util.payload(), util.operation().name());
-                })
-                .subscribeOn(Schedulers.boundedElastic())
-                .doOnError(e -> log.error(e.getMessage(), e))
-                .subscribe();
+            DebeziumEventUtil util = new DebeziumEventUtil(sourceRecordRecordChangeEvent);
+            replicateAccountUseCase.replicateData(util.payload(), util.operation().name());
+        })
+        .subscribeOn(Schedulers.boundedElastic())
+        .doOnError(e -> log.error(e.getMessage(), e))
+        .subscribe();
     }
 
     @PostConstruct

@@ -17,7 +17,7 @@ public class AccountEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToMany(mappedBy = "account"/*, cascade = CascadeType.ALL*/)
+    @OneToMany(mappedBy = "account")
     private List<MovementEntity> movement;
 
     @Column(name = "cli_id")

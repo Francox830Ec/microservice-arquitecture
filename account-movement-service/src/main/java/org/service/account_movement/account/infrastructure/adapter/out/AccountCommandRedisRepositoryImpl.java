@@ -33,7 +33,7 @@ public class AccountCommandRedisRepositoryImpl implements IAccountCommandReading
                 payload.get("accNumber").toString(),
                 payload.get("accType").toString(),
                 (BigDecimal) payload.get("accInitialBalance"),
-                payload.get("accState").toString(),
+                (Boolean) payload.get("accState"),
                 null
         ));
     }

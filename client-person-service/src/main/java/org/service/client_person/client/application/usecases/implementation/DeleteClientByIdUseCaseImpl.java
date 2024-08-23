@@ -2,6 +2,7 @@ package org.service.client_person.client.application.usecases.implementation;
 
 import org.service.client_person.client.application.usecases.contract.IDeleteClientByIdUseCase;
 import org.service.client_person.client.application.usecases.exception.RecursoNotFoundException;
+import org.service.client_person.client.domain.model.ClientDTO;
 import org.service.client_person.client.domain.port.out.IClientRepository;
 
 import java.util.UUID;
@@ -19,5 +20,13 @@ public class DeleteClientByIdUseCaseImpl implements IDeleteClientByIdUseCase {
             throw new RecursoNotFoundException(new StringBuilder("Client not found with id: ").append(id).toString());
 
         repository.deleteById(id);
+    }
+
+    @Override
+    public ClientDTO deleteLogicalById(UUID id) {
+        return repository.findById(id)
+                .map(savedClientDTO -> repository.update(
+                        new ClientDTO(savedClientDTO.id(), savedClientDTO.password(), false, savedClientDTO.person())))
+                .orElseThrow(() -> new RecursoNotFoundException(new StringBuilder("Client not found with id: ").append(id).toString()));
     }
 }

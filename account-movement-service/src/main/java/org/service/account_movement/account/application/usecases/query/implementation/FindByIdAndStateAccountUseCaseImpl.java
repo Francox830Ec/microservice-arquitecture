@@ -15,7 +15,7 @@ public class FindByIdAndStateAccountUseCaseImpl implements IFindByIdAndStateAcco
     }
 
     @Override
-    public Optional<AccountDTO> findByIdAndState(UUID id, String state) {
+    public Optional<AccountDTO> findByIdAndState(UUID id, Boolean state) {
         return repository.findByIdAndState(id, state);
     }
 }

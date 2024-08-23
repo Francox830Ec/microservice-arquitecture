@@ -54,8 +54,9 @@ public class ClientCRUDReactiveServiceImpl implements IClientCRUDReactiveService
 
     @Override
     public Mono<Void> delete(UUID id) {
-        return Mono.fromRunnable(() -> deleteByIdUseCase.deleteById(id))
+        return Mono.fromCallable(() -> deleteByIdUseCase.deleteLogicalById(id))
                 .subscribeOn(Schedulers.boundedElastic())
+                .doOnNext(clientResponseDTO -> sendMQUseCase.sendPayloadMQ(clientResponseDTO, "update"))
                 .doOnError(e -> log.error(e.getMessage(), e))
                 .then();
     }

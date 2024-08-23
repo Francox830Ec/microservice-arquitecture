@@ -5,6 +5,6 @@ import org.service.account_movement.account.domain.model.AccountDTO;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface IFindByIdAndStateAccountUseCase {
-    Optional<AccountDTO> findByIdAndState(UUID id, Boolean state);
+public interface IFindByIdAccountUseCase {
+    Optional<AccountDTO> findById(UUID id);
 }

@@ -10,11 +10,11 @@ import java.util.UUID;
 public record MovementDTO(
         UUID id,
         @NotNull
-        @NotEmpty
         UUID accountId,
         LocalDateTime date,
         String type,
         BigDecimal initialBalance,
+        @NotNull
         BigDecimal value,
         BigDecimal finalBalance
 ) {

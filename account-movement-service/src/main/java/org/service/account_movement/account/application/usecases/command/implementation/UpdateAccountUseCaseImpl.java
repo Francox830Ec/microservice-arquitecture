@@ -20,12 +20,12 @@ public class UpdateAccountUseCaseImpl implements IUpdateAccountUseCase {
 
     @Override
     public AccountDTO updateById(UUID id, AccountDTO requestDTO) {
-        return queryRepository.findByIdAndState(id, "true")
+        return queryRepository.findById(id)
                 .map(savedDTO -> commandRepository.update(new AccountDTO(savedDTO.id(),
-                        requestDTO.clientID(),
-                        requestDTO.number(),
-                        requestDTO.type(),
-                        requestDTO.initialBalance(),
+                        savedDTO.clientID(),
+                        savedDTO.number(),
+                        savedDTO.type(),
+                        savedDTO.initialBalance(),
                         requestDTO.state(), savedDTO.movements()))
                 )
                 .orElseThrow(() -> new RecursoNotFoundException(new StringBuilder("Account not found with id: ")

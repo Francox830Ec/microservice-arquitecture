@@ -2,21 +2,27 @@ package org.service.account_movement.account.infrastructure.conf;
 
 import org.service.account_movement.account.application.usecases.command.contract.*;
 import org.service.account_movement.account.application.usecases.command.implementation.*;
+import org.service.account_movement.account.application.usecases.query.contract.IFindAllAccountUseCase;
 import org.service.account_movement.account.application.usecases.query.contract.IFindAllByStateAccountUseCase;
+import org.service.account_movement.account.application.usecases.query.contract.IFindByIdAccountUseCase;
 import org.service.account_movement.account.application.usecases.query.contract.IFindByIdAndStateAccountUseCase;
+import org.service.account_movement.account.application.usecases.query.implementation.FindAllAccountUseCaseImpl;
 import org.service.account_movement.account.application.usecases.query.implementation.FindAllByStateAccountUseCaseImpl;
+import org.service.account_movement.account.application.usecases.query.implementation.FindByIdAccountUseCaseImpl;
 import org.service.account_movement.account.application.usecases.query.implementation.FindByIdAndStateAccountUseCaseImpl;
 import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
 import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
 import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
+import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanAccountConfiguration {
     @Bean
-    ICreateAccountUseCase createAccountUseCase (final IAccountCommandRepository accountCommandRepository) {
-        return new CreateAccountUseCaseImpl(accountCommandRepository);
+    ICreateAccountUseCase createAccountUseCase (final IAccountCommandRepository accountCommandRepository,
+                                                final IClientReadingDBRepository clientReadingDBRepository) {
+        return new CreateAccountUseCaseImpl(accountCommandRepository, clientReadingDBRepository);
     }
 
     @Bean
@@ -32,13 +38,23 @@ public class BeanAccountConfiguration {
     }
 
     @Bean
-    IFindAllByStateAccountUseCase findAllAccountUseCase (final IAccountQueryRepository accountQueryRepository) {
+    IFindAllByStateAccountUseCase findAllByStateAccountUseCase (final IAccountQueryRepository accountQueryRepository) {
         return new FindAllByStateAccountUseCaseImpl(accountQueryRepository);
     }
 
     @Bean
-    IFindByIdAndStateAccountUseCase findByIdAccountUseCase (final IAccountQueryRepository accountQueryRepository) {
+    IFindAllAccountUseCase findAllAccountUseCase (final IAccountQueryRepository accountQueryRepository) {
+        return new FindAllAccountUseCaseImpl(accountQueryRepository);
+    }
+
+    @Bean
+    IFindByIdAndStateAccountUseCase findByIdAndStateAccountUseCase (final IAccountQueryRepository accountQueryRepository) {
         return new FindByIdAndStateAccountUseCaseImpl(accountQueryRepository);
+    }
+
+    @Bean
+    IFindByIdAccountUseCase findByIdAccountUseCase (final IAccountQueryRepository accountQueryRepository) {
+        return new FindByIdAccountUseCaseImpl(accountQueryRepository);
     }
 
     @Bean

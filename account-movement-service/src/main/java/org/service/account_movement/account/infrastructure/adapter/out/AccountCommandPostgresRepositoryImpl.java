@@ -2,6 +2,7 @@ package org.service.account_movement.account.infrastructure.adapter.out;
 
 import org.service.account_movement.account.domain.model.AccountDTO;
 import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
+import org.service.account_movement.account.infrastructure.entity.AccountEntity;
 import org.service.account_movement.account.infrastructure.mapper.IAccountMapper;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,10 @@ public class AccountCommandPostgresRepositoryImpl implements IAccountCommandRepo
 
     @Override
     public AccountDTO create(AccountDTO accountDTO) {
-        return mapper.entityToDTO(repository.save(mapper.dtoToEntity(accountDTO)));
+        AccountEntity accountEntity = mapper.dtoToEntity(accountDTO);
+        AccountEntity save = repository.save(accountEntity);
+
+        return mapper.entityToDTO(save);
     }
 
     @Override
@@ -31,5 +35,10 @@ public class AccountCommandPostgresRepositoryImpl implements IAccountCommandRepo
     @Override
     public void deleteById(UUID id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public long count() {
+        return repository.count();
     }
 }
