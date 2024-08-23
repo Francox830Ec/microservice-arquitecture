@@ -5,24 +5,33 @@ import org.service.client_person.client.application.usecases.exception.InvalidVa
 import org.service.client_person.client.domain.model.ClientDTO;
 import org.service.client_person.client.domain.port.out.IClientRepository;
 import org.service.client_person.person.domain.model.PersonDTO;
+import org.service.client_person.person.domain.port.out.IPersonRepository;
 
 public class CreateClientUseCaseImpl implements ICreateClientUseCase {
     private final IClientRepository repository;
+    private final IPersonRepository personRepository;
 
-    public CreateClientUseCaseImpl(IClientRepository repository) {
+    public CreateClientUseCaseImpl(IClientRepository repository,
+                                   IPersonRepository personRepository) {
         this.repository = repository;
+        this.personRepository = personRepository;
     }
 
     @Override
     public ClientDTO create(ClientDTO clientDTO) {
-        return repository.create(validateCreation(clientDTO));
+        validateCreation(clientDTO);
+        validateIdentification(clientDTO.person().identification());
+        return repository.create(buildClientDTO(clientDTO));
     }
 
-    private ClientDTO validateCreation(ClientDTO requestClientDTO) {
+    private void validateCreation(ClientDTO requestClientDTO) {
         if(requestClientDTO.id() != null || requestClientDTO.person().id() != null){
             throw new InvalidValueException("This service only allows you to create new clients/persons.");
         }
 
+    }
+
+    private static ClientDTO buildClientDTO(ClientDTO requestClientDTO) {
         return new ClientDTO(null, requestClientDTO.password(), true,
                 new PersonDTO(
                         null,
@@ -32,5 +41,12 @@ public class CreateClientUseCaseImpl implements ICreateClientUseCase {
                         requestClientDTO.person().identification(),
                         requestClientDTO.person().address(),
                         requestClientDTO.person().phone()));
+    }
+
+    private void validateIdentification(String identification) {
+        personRepository.findByIdentification(identification)
+                .ifPresent(personDTO -> {
+                    throw new InvalidValueException("Identification " + identification + " already exists.");
+                });
     }
 }

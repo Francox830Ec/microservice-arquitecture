@@ -4,14 +4,15 @@ import org.service.client_person.client.application.usecases.contract.*;
 import org.service.client_person.client.application.usecases.implementation.*;
 import org.service.client_person.client.domain.port.out.IClientRepository;
 import org.service.client_person.client.domain.port.out.IProducerClientMQ;
+import org.service.client_person.person.domain.port.out.IPersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanClientConfiguration {
     @Bean
-    ICreateClientUseCase createClientUseCase(final IClientRepository repository){
-        return new CreateClientUseCaseImpl(repository);
+    ICreateClientUseCase createClientUseCase(final IClientRepository repository, final IPersonRepository personRepository){
+        return new CreateClientUseCaseImpl(repository, personRepository);
     }
 
     @Bean

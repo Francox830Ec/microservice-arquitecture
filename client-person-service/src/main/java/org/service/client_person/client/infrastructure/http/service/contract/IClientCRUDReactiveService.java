@@ -1,8 +1,6 @@
 package org.service.client_person.client.infrastructure.http.service.contract;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import org.service.client_person.client.domain.model.ClientDTO;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;

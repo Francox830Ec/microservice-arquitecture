@@ -1,6 +1,5 @@
 package org.service.account_movement.movement.domain;
 
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;

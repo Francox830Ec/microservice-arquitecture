@@ -28,4 +28,9 @@ public class PersonJPAPostgresRepositoryImpl implements IPersonRepository {
     public Optional<PersonDTO> findById(UUID id) {
         return repository.findById(id).map(mapper::entityToDTO);
     }
+
+    @Override
+    public Optional<PersonDTO> findByIdentification(String identification) {
+        return repository.findByIdentification(identification).map(mapper::entityToDTO);
+    }
 }

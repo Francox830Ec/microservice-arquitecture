@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface IPersonRepository {
     PersonDTO create(PersonDTO personDTO);
     Optional<PersonDTO> findById(UUID id);
+    Optional<PersonDTO> findByIdentification(String identification);
 }
