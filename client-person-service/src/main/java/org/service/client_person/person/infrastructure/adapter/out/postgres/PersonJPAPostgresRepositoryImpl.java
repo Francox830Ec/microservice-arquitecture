@@ -1,4 +1,4 @@
-package org.service.client_person.person.infrastructure.adapter.out.repository;
+package org.service.client_person.person.infrastructure.adapter.out.postgres;
 
 import org.service.client_person.person.domain.model.PersonDTO;
 import org.service.client_person.person.domain.port.out.repository.IPersonRepository;

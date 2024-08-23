@@ -1,4 +1,4 @@
-package org.service.account_movement.client_person_external.domain.port.out;
+package org.service.account_movement.client_person_external.domain.port.out.repositoy;
 
 import org.service.account_movement.account.domain.model.ClientDTO;
 

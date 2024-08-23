@@ -4,8 +4,8 @@ import org.service.account_movement.account.application.usecases.command.contrac
 import org.service.account_movement.account.application.usecases.exception.InvalidValueException;
 import org.service.account_movement.account.application.usecases.exception.RecursoNotFoundException;
 import org.service.account_movement.account.domain.model.AccountDTO;
-import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
-import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandRepository;
+import org.service.account_movement.client_person_external.domain.port.out.repositoy.IClientReadingDBRepository;
 
 import java.math.BigDecimal;
 

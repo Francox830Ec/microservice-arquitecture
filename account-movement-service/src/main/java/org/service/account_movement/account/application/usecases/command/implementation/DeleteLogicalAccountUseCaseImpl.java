@@ -3,8 +3,8 @@ package org.service.account_movement.account.application.usecases.command.implem
 import org.service.account_movement.account.application.usecases.command.contract.IDeleteLogicalAccountUseCase;
 import org.service.account_movement.account.application.usecases.exception.RecursoNotFoundException;
 import org.service.account_movement.account.domain.model.AccountDTO;
-import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
 
 import java.util.UUID;
 

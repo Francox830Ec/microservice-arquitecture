@@ -7,7 +7,7 @@ import org.service.account_movement.client_person_external.application.usecases.
 import org.service.account_movement.client_person_external.application.usecases.query.contract.IFindClientByPersonIdentificationUseCase;
 import org.service.account_movement.client_person_external.application.usecases.query.implementation.FindByIdClientUseCaseImpl;
 import org.service.account_movement.client_person_external.application.usecases.query.implementation.FindClientByPersonIdentificationUseCaseImpl;
-import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
+import org.service.account_movement.client_person_external.domain.port.out.repositoy.IClientReadingDBRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -2,7 +2,7 @@ package org.service.account_movement.account.domain.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.service.account_movement.movement.domain.MovementDTO;
+import org.service.account_movement.movement.domain.model.MovementDTO;
 
 import java.math.BigDecimal;
 import java.util.List;

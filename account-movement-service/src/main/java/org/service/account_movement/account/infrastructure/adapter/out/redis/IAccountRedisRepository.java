@@ -1,4 +1,4 @@
-package org.service.account_movement.account.infrastructure.adapter.out;
+package org.service.account_movement.account.infrastructure.adapter.out.redis;
 
 import org.service.account_movement.account.infrastructure.hash.AccountHash;
 import org.springframework.data.repository.CrudRepository;

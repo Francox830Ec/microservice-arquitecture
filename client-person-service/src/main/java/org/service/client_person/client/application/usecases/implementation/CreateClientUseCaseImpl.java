@@ -3,9 +3,9 @@ package org.service.client_person.client.application.usecases.implementation;
 import org.service.client_person.client.application.usecases.contract.ICreateClientUseCase;
 import org.service.client_person.client.application.usecases.exception.InvalidValueException;
 import org.service.client_person.client.domain.model.ClientDTO;
-import org.service.client_person.client.domain.port.out.IClientRepository;
+import org.service.client_person.client.domain.port.out.repository.IClientRepository;
 import org.service.client_person.person.domain.model.PersonDTO;
-import org.service.client_person.person.domain.port.out.IPersonRepository;
+import org.service.client_person.person.domain.port.out.repository.IPersonRepository;
 
 public class CreateClientUseCaseImpl implements ICreateClientUseCase {
     private final IClientRepository repository;

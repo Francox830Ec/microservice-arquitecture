@@ -2,11 +2,11 @@ package org.service.account_movement.movement.application.usescases.command.impl
 
 import org.service.account_movement.account.application.usecases.exception.InvalidValueException;
 import org.service.account_movement.account.application.usecases.exception.RecursoNotFoundException;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
 import org.service.account_movement.movement.application.usescases.command.contract.ICreateMovementUseCase;
-import org.service.account_movement.movement.domain.MovementDTO;
-import org.service.account_movement.movement.domain.out.IMovementCommandRepository;
-import org.service.account_movement.movement.domain.out.IMovementQueryRepository;
+import org.service.account_movement.movement.domain.model.MovementDTO;
+import org.service.account_movement.movement.domain.out.repository.IMovementCommandRepository;
+import org.service.account_movement.movement.domain.out.repository.IMovementQueryRepository;
 
 import java.math.BigDecimal;
 import java.util.Optional;

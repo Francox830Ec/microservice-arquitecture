@@ -2,7 +2,7 @@ package org.service.account_movement.account.application.usecases.query.implemen
 
 import org.service.account_movement.account.application.usecases.query.contract.IFindAllByStateAccountUseCase;
 import org.service.account_movement.account.domain.model.AccountDTO;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
 
 import java.util.List;
 

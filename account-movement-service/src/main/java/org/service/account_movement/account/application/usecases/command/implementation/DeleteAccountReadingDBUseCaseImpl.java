@@ -1,7 +1,7 @@
 package org.service.account_movement.account.application.usecases.command.implementation;
 
 import org.service.account_movement.account.application.usecases.command.contract.IDeleteAccountReadingDBUseCase;
-import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandReadingDBRepository;
 
 import java.util.UUID;
 

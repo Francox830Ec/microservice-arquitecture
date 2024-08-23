@@ -1,4 +1,4 @@
-package org.service.account_movement.account.domain.port.out;
+package org.service.account_movement.account.domain.port.out.repository;
 
 import org.service.account_movement.account.domain.model.AccountDTO;
 

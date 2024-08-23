@@ -1,4 +1,4 @@
-package org.service.account_movement.movement.domain;
+package org.service.account_movement.movement.domain.model;
 
 import jakarta.validation.constraints.NotNull;
 

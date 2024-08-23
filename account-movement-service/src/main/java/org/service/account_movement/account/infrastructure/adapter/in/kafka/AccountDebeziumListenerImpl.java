@@ -1,4 +1,4 @@
-package org.service.account_movement.account.infrastructure.adapter.in.messages;
+package org.service.account_movement.account.infrastructure.adapter.in.kafka;
 
 import io.debezium.config.Configuration;
 import io.debezium.embedded.Connect;

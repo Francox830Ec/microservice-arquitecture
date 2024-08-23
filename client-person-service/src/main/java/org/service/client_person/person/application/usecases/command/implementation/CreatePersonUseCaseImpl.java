@@ -2,7 +2,7 @@ package org.service.client_person.person.application.usecases.command.implementa
 
 import org.service.client_person.person.application.usecases.command.contract.ICreatePersonUseCase;
 import org.service.client_person.person.domain.model.PersonDTO;
-import org.service.client_person.person.domain.port.out.IPersonRepository;
+import org.service.client_person.person.domain.port.out.repository.IPersonRepository;
 
 public class CreatePersonUseCaseImpl implements ICreatePersonUseCase {
     private final IPersonRepository commandRepository;

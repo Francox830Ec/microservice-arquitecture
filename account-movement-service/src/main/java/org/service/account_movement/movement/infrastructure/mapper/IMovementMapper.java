@@ -1,7 +1,7 @@
 package org.service.account_movement.movement.infrastructure.mapper;
 
 import org.mapstruct.Mapper;
-import org.service.account_movement.movement.domain.MovementDTO;
+import org.service.account_movement.movement.domain.model.MovementDTO;
 import org.service.account_movement.movement.infrastructure.entity.MovementEntity;
 import org.service.account_movement.movement.infrastructure.hash.MovementHash;
 

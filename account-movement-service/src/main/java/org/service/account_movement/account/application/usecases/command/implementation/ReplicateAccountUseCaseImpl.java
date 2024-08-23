@@ -4,8 +4,8 @@ import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.service.account_movement.account.application.usecases.command.contract.IReplicateAccountUseCase;
 import org.service.account_movement.account.application.usecases.exception.OperationNotFounfException;
 import org.service.account_movement.account.domain.model.AccountDTO;
-import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
 
 import java.math.BigDecimal;
 import java.util.Map;

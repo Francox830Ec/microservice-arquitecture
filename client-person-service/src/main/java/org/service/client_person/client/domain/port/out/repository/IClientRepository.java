@@ -1,4 +1,4 @@
-package org.service.client_person.client.domain.port.out;
+package org.service.client_person.client.domain.port.out.repository;
 
 import org.service.client_person.client.domain.model.ClientDTO;
 

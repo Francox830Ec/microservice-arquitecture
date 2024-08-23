@@ -5,7 +5,7 @@ import org.service.client_person.client.domain.model.ClientDTO;
 import org.service.client_person.client.domain.model.ClientPersonProducerMQDTO;
 import org.service.client_person.client.domain.model.CustomEvent;
 import org.service.client_person.client.domain.model.PersonMQDTO;
-import org.service.client_person.client.domain.port.out.IProducerClientMQ;
+import org.service.client_person.client.domain.port.out.messages.IProducerClientMQ;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

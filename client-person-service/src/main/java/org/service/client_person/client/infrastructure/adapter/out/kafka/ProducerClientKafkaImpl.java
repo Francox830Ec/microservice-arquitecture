@@ -1,4 +1,4 @@
-package org.service.client_person.client.infrastructure.adapter.out.messages;
+package org.service.client_person.client.infrastructure.adapter.out.kafka;
 
 import lombok.extern.log4j.Log4j2;
 import org.service.client_person.client.domain.model.CustomEvent;

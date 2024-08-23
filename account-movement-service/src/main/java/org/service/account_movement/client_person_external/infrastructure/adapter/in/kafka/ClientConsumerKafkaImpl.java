@@ -1,9 +1,9 @@
-package org.service.account_movement.client_person_external.infrastructure.adapter.in;
+package org.service.account_movement.client_person_external.infrastructure.adapter.in.kafka;
 
 import lombok.extern.log4j.Log4j2;
 import org.service.account_movement.client_person_external.application.usecases.command.contract.ICreateClientReadingDBUseCase;
 import org.service.account_movement.client_person_external.domain.model.CustomEvent;
-import org.service.account_movement.client_person_external.domain.port.in.IClientConsumerMQ;
+import org.service.account_movement.client_person_external.domain.port.in.messages.IClientConsumerMQ;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.kafka.core.reactive.ReactiveKafkaConsumerTemplate;

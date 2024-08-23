@@ -2,7 +2,7 @@ package org.service.client_person.person.infrastructure.conf;
 
 import org.service.client_person.person.application.usecases.command.contract.ICreatePersonUseCase;
 import org.service.client_person.person.application.usecases.command.implementation.CreatePersonUseCaseImpl;
-import org.service.client_person.person.domain.port.out.IPersonRepository;
+import org.service.client_person.person.domain.port.out.repository.IPersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

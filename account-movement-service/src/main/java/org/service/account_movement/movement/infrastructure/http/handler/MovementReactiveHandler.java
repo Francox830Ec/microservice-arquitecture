@@ -1,6 +1,6 @@
 package org.service.account_movement.movement.infrastructure.http.handler;
 
-import org.service.account_movement.movement.domain.MovementDTO;
+import org.service.account_movement.movement.domain.model.MovementDTO;
 import org.service.account_movement.movement.infrastructure.http.service.contract.IMovementCommandReactiveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

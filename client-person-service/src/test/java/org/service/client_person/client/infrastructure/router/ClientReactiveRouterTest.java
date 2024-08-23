@@ -3,7 +3,7 @@ package org.service.client_person.client.infrastructure.router;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.service.client_person.client.domain.model.ClientDTO;
-import org.service.client_person.client.domain.port.out.IClientRepository;
+import org.service.client_person.client.domain.port.out.repository.IClientRepository;
 import org.service.client_person.person.domain.model.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;

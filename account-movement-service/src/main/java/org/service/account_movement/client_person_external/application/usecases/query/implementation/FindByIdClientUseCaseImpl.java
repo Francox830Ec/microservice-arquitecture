@@ -2,7 +2,7 @@ package org.service.account_movement.client_person_external.application.usecases
 
 import org.service.account_movement.account.domain.model.ClientDTO;
 import org.service.account_movement.client_person_external.application.usecases.query.contract.IFindByIdClientUseCase;
-import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
+import org.service.account_movement.client_person_external.domain.port.out.repositoy.IClientReadingDBRepository;
 
 import java.util.Optional;
 import java.util.UUID;

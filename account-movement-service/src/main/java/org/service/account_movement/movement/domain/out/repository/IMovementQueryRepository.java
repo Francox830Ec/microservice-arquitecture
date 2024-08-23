@@ -1,6 +1,6 @@
-package org.service.account_movement.movement.domain.out;
+package org.service.account_movement.movement.domain.out.repository;
 
-import org.service.account_movement.movement.domain.MovementDTO;
+import org.service.account_movement.movement.domain.model.MovementDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;

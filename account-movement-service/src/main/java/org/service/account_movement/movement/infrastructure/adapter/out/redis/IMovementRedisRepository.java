@@ -1,4 +1,4 @@
-package org.service.account_movement.movement.infrastructure.adapter.out;
+package org.service.account_movement.movement.infrastructure.adapter.out.redis;
 
 import org.service.account_movement.movement.infrastructure.hash.MovementHash;
 import org.springframework.data.jpa.repository.Query;

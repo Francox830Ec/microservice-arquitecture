@@ -1,16 +1,16 @@
 package org.service.account_movement.movement.infrastructure.conf;
 
-import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
-import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
-import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
+import org.service.account_movement.client_person_external.domain.port.out.repositoy.IClientReadingDBRepository;
 import org.service.account_movement.movement.application.usescases.command.contract.ICreateMovementUseCase;
 import org.service.account_movement.movement.application.usescases.command.contract.IReplicateMovementUseCase;
 import org.service.account_movement.movement.application.usescases.command.implementation.CreateMovementUseCaseImpl;
 import org.service.account_movement.movement.application.usescases.command.implementation.ReplicateMovementUseCaseImpl;
-import org.service.account_movement.movement.domain.out.IMovementCommandReadingDBRepository;
-import org.service.account_movement.movement.domain.out.IMovementCommandRepository;
-import org.service.account_movement.movement.domain.out.IMovementQueryRepository;
+import org.service.account_movement.movement.domain.out.repository.IMovementCommandReadingDBRepository;
+import org.service.account_movement.movement.domain.out.repository.IMovementCommandRepository;
+import org.service.account_movement.movement.domain.out.repository.IMovementQueryRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

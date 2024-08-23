@@ -1,7 +1,7 @@
-package org.service.account_movement.movement.infrastructure.adapter.out;
+package org.service.account_movement.movement.infrastructure.adapter.out.redis;
 
-import org.service.account_movement.movement.domain.MovementDTO;
-import org.service.account_movement.movement.domain.out.IMovementQueryRepository;
+import org.service.account_movement.movement.domain.model.MovementDTO;
+import org.service.account_movement.movement.domain.out.repository.IMovementQueryRepository;
 import org.service.account_movement.movement.infrastructure.mapper.IMovementMapper;
 import org.springframework.stereotype.Repository;
 

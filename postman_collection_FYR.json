@@ -51,7 +51,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"password\": \"123\",\r\n\t\"person\": {\r\n\t\t\"name\": \"person 6\",\r\n\t\t\"gender\": \"Masculino\",\r\n\t\t\"age\": 18,\r\n\t\t\"identification\": \"0200000006\",\r\n\t\t\"address\": \"NA\",\r\n\t\t\"phone\": \"1800 100 100\"\r\n\t}\r\n}",
+							"raw": "{\r\n    \"password\": \"123\",\r\n\t\"person\": {\r\n\t\t\"name\": \"person 5\",\r\n\t\t\"gender\": \"Masculino\",\r\n\t\t\"age\": 18,\r\n\t\t\"identification\": \"011111\",\r\n\t\t\"address\": null,\r\n\t\t\"phone\": \"1800 100 100\"\r\n\t}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -255,7 +255,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"state\": \"true\"\r\n}",
+							"raw": "{\r\n\"clientID\": \"d1d0070f-184e-4c06-a7d7-a86e9cafff38\",\r\n    \"type\": \"Correinte\",\r\n    \"initialBalance\": 3000,\r\n    \"state\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -263,7 +263,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/api/v1/cuentas/69808150-6321-41bc-a3c5-2a2dcec43739",
+							"raw": "http://localhost:3002/api/v1/cuentas/d15f8e1b-3f32-4ccf-b3f7-4f03a9d01dd9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -273,7 +273,7 @@
 								"api",
 								"v1",
 								"cuentas",
-								"69808150-6321-41bc-a3c5-2a2dcec43739"
+								"d15f8e1b-3f32-4ccf-b3f7-4f03a9d01dd9"
 							]
 						}
 					},

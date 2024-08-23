@@ -2,7 +2,7 @@ package org.service.account_movement.movement.infrastructure.http.service.implem
 
 import lombok.extern.log4j.Log4j2;
 import org.service.account_movement.movement.application.usescases.command.contract.ICreateMovementUseCase;
-import org.service.account_movement.movement.domain.MovementDTO;
+import org.service.account_movement.movement.domain.model.MovementDTO;
 import org.service.account_movement.movement.infrastructure.http.service.contract.IMovementCommandReactiveService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

@@ -9,7 +9,7 @@ import org.service.account_movement.account.application.usecases.query.contract.
 import org.service.account_movement.account.domain.model.AccountDTO;
 import org.service.account_movement.account.infrastructure.http.service.contract.IAccountCommandReactiveService;
 import org.service.account_movement.movement.application.usescases.command.contract.ICreateMovementUseCase;
-import org.service.account_movement.movement.domain.MovementDTO;
+import org.service.account_movement.movement.domain.model.MovementDTO;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;

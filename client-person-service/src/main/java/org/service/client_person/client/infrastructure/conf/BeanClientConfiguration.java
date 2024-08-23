@@ -2,9 +2,9 @@ package org.service.client_person.client.infrastructure.conf;
 
 import org.service.client_person.client.application.usecases.contract.*;
 import org.service.client_person.client.application.usecases.implementation.*;
-import org.service.client_person.client.domain.port.out.IClientRepository;
-import org.service.client_person.client.domain.port.out.IProducerClientMQ;
-import org.service.client_person.person.domain.port.out.IPersonRepository;
+import org.service.client_person.client.domain.port.out.messages.IProducerClientMQ;
+import org.service.client_person.client.domain.port.out.repository.IClientRepository;
+import org.service.client_person.person.domain.port.out.repository.IPersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

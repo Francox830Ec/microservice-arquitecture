@@ -10,10 +10,10 @@ import org.service.account_movement.account.application.usecases.query.implement
 import org.service.account_movement.account.application.usecases.query.implementation.FindAllByStateAccountUseCaseImpl;
 import org.service.account_movement.account.application.usecases.query.implementation.FindByIdAccountUseCaseImpl;
 import org.service.account_movement.account.application.usecases.query.implementation.FindByIdAndStateAccountUseCaseImpl;
-import org.service.account_movement.account.domain.port.out.IAccountCommandReadingDBRepository;
-import org.service.account_movement.account.domain.port.out.IAccountCommandRepository;
-import org.service.account_movement.account.domain.port.out.IAccountQueryRepository;
-import org.service.account_movement.client_person_external.domain.port.out.IClientReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandReadingDBRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountCommandRepository;
+import org.service.account_movement.account.domain.port.out.repository.IAccountQueryRepository;
+import org.service.account_movement.client_person_external.domain.port.out.repositoy.IClientReadingDBRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

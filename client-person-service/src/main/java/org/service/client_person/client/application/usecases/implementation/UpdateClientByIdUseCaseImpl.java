@@ -3,7 +3,7 @@ package org.service.client_person.client.application.usecases.implementation;
 import org.service.client_person.client.application.usecases.contract.IUpdateClientByIdUseCase;
 import org.service.client_person.client.application.usecases.exception.RecursoNotFoundException;
 import org.service.client_person.client.domain.model.ClientDTO;
-import org.service.client_person.client.domain.port.out.IClientRepository;
+import org.service.client_person.client.domain.port.out.repository.IClientRepository;
 import org.service.client_person.person.domain.model.PersonDTO;
 
 import java.util.UUID;
