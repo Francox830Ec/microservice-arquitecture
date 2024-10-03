@@ -1,7 +1,7 @@
 package org.service.account_movement.client_person_external.infrastructure.adapter.out.redis;
 
-import org.service.account_movement.account.domain.model.ClientDTO;
 import org.service.account_movement.account.infrastructure.mapper.IClientMapper;
+import org.service.account_movement.client_person_external.domain.model.ClientDTO;
 import org.service.account_movement.client_person_external.domain.port.out.repositoy.IClientReadingDBRepository;
 import org.springframework.stereotype.Repository;
 

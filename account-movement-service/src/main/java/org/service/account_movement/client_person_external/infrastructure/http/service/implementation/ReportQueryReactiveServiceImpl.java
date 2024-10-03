@@ -1,8 +1,8 @@
 package org.service.account_movement.client_person_external.infrastructure.http.service.implementation;
 
 import lombok.extern.log4j.Log4j2;
-import org.service.account_movement.account.domain.model.ClientDTO;
 import org.service.account_movement.client_person_external.application.usecases.query.contract.IFindClientByPersonIdentificationUseCase;
+import org.service.account_movement.client_person_external.domain.model.ClientDTO;
 import org.service.account_movement.client_person_external.infrastructure.http.service.contract.IReportQueryReactiveService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
