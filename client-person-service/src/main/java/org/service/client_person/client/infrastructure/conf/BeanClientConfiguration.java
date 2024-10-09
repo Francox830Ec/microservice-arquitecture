@@ -9,6 +9,7 @@ import org.service.client_person.client.infrastructure.http.exception.ReactiveEx
 import org.service.client_person.person.domain.port.out.repository.IPersonRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,14 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.reactive.config.EnableWebFlux;
 
 import java.util.Map;
 
 @Configuration
+@EnableWebFlux
+@EnableConfigurationProperties(WebProperties.class)
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 public class BeanClientConfiguration {
     @Bean
     ICreateClientUseCase createClientUseCase(final IClientRepository repository, final IPersonRepository personRepository){

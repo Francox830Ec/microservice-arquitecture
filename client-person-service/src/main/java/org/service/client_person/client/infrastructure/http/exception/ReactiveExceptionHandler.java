@@ -40,15 +40,9 @@ public class ReactiveExceptionHandler extends AbstractErrorWebExceptionHandler {
     }
 
     private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
-
         Throwable error = getError(request);
-        log.error("An error has been occurred", error);
-        HttpStatus httpStatus;
-        if (error instanceof Exception exception) {
-            httpStatus = exceptionToStatusCode.getOrDefault(exception.getClass(), defaultStatus);
-        } else {
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
+        HttpStatus httpStatus = getHttpStatus(error);
+
         return ServerResponse
                 .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -58,5 +52,13 @@ public class ReactiveExceptionHandler extends AbstractErrorWebExceptionHandler {
                         .message(error.getMessage())
                         .build())
                 );
+    }
+
+    private HttpStatus getHttpStatus(Throwable error) {
+        if (error instanceof Exception exception) {
+            return exceptionToStatusCode.getOrDefault(exception.getClass(), defaultStatus);
+        } else {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
     }
 }

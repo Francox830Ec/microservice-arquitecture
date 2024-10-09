@@ -27,8 +27,7 @@ public class ClientReactiveHandler {
                 .flatMap(response -> ServerResponse
                         .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(response)))
-                .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
+                        .body(fromValue(response)));
     }
 
     public Mono<ServerResponse> update(ServerRequest request){
@@ -37,8 +36,7 @@ public class ClientReactiveHandler {
                 .flatMap(response -> ServerResponse
                         .status(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(response)))
-                .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
+                        .body(fromValue(response)));
     }
 
     public Mono<ServerResponse> delete(ServerRequest request){
@@ -46,8 +44,7 @@ public class ClientReactiveHandler {
                 .then(ServerResponse
                         .status(HttpStatus.NO_CONTENT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .build())
-                .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
+                        .build());
     }
 
     public Mono<ServerResponse> findById(ServerRequest request){
@@ -55,17 +52,19 @@ public class ClientReactiveHandler {
                 .flatMap(response -> ServerResponse
                         .status(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(response)))
-                .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
+                        .body(fromValue(response)));
     }
 
     public Mono<ServerResponse> findAll(ServerRequest request){
         return service.findAll()
                 .collectList()
-                .flatMap(response -> ServerResponse
-                        .status(HttpStatus.OK)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(response)))
-                .onErrorResume(e -> ServerResponse.badRequest().bodyValue(e.getMessage()));
+                .flatMap(response -> {
+                    request.queryParam("");
+                    return  ServerResponse
+                            .status(HttpStatus.OK)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(fromValue(response));
+
+                });
     }
 }
