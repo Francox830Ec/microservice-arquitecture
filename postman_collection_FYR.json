@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "cc890c06-afc4-4c02-85b8-f76a772c382e",
+		"name": "Microservices Arquitecture FYR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17530893"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "Create Person",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"333\",\r\n   \"gender\": \"aaaawww\",\r\n    \"age\": 2,\r\n    \"identification\": \"123456789\",\r\n    \"address\": \"NA\",\r\n    \"phone\": \"1800 100 100\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"person"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Create Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123\",\r\n\t\"person\": {\r\n\t\t\"name\": \"person 5\",\r\n\t\t\"gender\": \"Masculino\",\r\n\t\t\"age\": 18,\r\n\t\t\"identification\": \"011111\",\r\n\t\t\"address\": null,\r\n\t\t\"phone\": \"1800 100 100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Client By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/clientes/5feb51a4-af40-4138-8faa-8f014a39a69d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"5feb51a4-af40-4138-8faa-8f014a39a69d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Client By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"password\": \"person 4 changed\",\r\n    \"state\": true,\r\n\t\"person\": {\r\n\t\t\"id\": \"a07a2813-833e-4d6e-bfc8-fe3249fbe1e2\",\r\n\t\t\"name\": \"person 4 changed 2\",\r\n\t\t\"gender\": \"Masculino\",\r\n\t\t\"age\": 18,\r\n\t\t\"identification\": \"0123456789\",\r\n\t\t\"address\": \"NA\",\r\n\t\t\"phone\": \"1800 100 100\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/clientes/5419e780-ef1a-4972-99ea-bc881737093b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"5419e780-ef1a-4972-99ea-bc881737093b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Client By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/v1/clientes/5419e780-ef1a-4972-99ea-bc881737093b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"5419e780-ef1a-4972-99ea-bc881737093b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"clientID\": \"5419e780-ef1a-4972-99ea-bc881737093b\",\r\n\t\"type\": \"corriente\",\r\n\t\"initialBalance\": 500\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/v1/cuentas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/api/v1/cuentas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Account By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/api/v1/cuentas/66ad6b13-f8a3-4394-a758-551551b55895",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"66ad6b13-f8a3-4394-a758-551551b55895"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"clientID\": \"d1d0070f-184e-4c06-a7d7-a86e9cafff38\",\r\n    \"type\": \"Correinte\",\r\n    \"initialBalance\": 3000,\r\n    \"state\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/v1/cuentas/d15f8e1b-3f32-4ccf-b3f7-4f03a9d01dd9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"d15f8e1b-3f32-4ccf-b3f7-4f03a9d01dd9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/api/v1/cuentas/69808150-6321-41bc-a3c5-2a2dcec43739",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"69808150-6321-41bc-a3c5-2a2dcec43739"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movement",
+			"item": [
+				{
+					"name": "Create Movement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"accountId\": \"bb5a675a-88be-4270-bd35-f283474e9eaf\",\r\n\t\"type\": \"Egreso\",\r\n\t\"value\": -400\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/v1/movimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reportes",
+			"item": [
+				{
+					"name": "Get Movements by Client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/api/v1/clientes/0123456789/movimientos/reportes?fechaInicial=2024-08-18&fechaFinal=2024-08-19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"0123456789",
+								"movimientos",
+								"reportes"
+							],
+							"query": [
+								{
+									"key": "fechaInicial",
+									"value": "2024-08-18"
+								},
+								{
+									"key": "fechaFinal",
+									"value": "2024-08-19"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

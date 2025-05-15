@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: debezium/postgres:16
+    restart: always
+    container_name: account-movement-service_postgres_16
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: account-movement
+      PGDATA: /data/postgres
+
+  redis:
+    image: redis:7.0-alpine
+    restart: always
+    container_name: account-movement-service_redis_7.0
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes

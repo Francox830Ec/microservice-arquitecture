@@ -1,0 +1,31 @@
+# Ignora archivos y carpetas comunes
+.git
+.gitignore
+README.md
+LICENSE
+*.md
+
+# Archivos de configuración del sistema/IDE
+*.iml
+.idea/
+.vscode/
+*.swp
+*.bak
+*.log
+
+# Archivos binarios y de compilación
+build/
+out/
+bin/
+.gradle/
+.gradle-cache/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Variables de entorno o archivos sensibles
+.env
+*.key
+*.pem
+*.crt
